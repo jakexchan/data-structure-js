@@ -2,11 +2,13 @@
  * Single linked list
  */
 
+// 创建节点
 function Node(data) {
   this.data = data;
   this.next = null;
 }
 
+// 创建单向链表
 function SingleLinkedList() {
   this.head = null;
   this.tail = null;
@@ -14,6 +16,7 @@ function SingleLinkedList() {
   this.length = 0;
 }
 
+// 头部插入方法
 SingleLinkedList.prototype.insertHead = function(data) {
   var node = new Node(data);
 
@@ -28,6 +31,7 @@ SingleLinkedList.prototype.insertHead = function(data) {
   this.length++;
 };
 
+// 尾部插入方法
 SingleLinkedList.prototype.insertTail = function(data) {
   var node = new Node(data);
 
@@ -42,6 +46,7 @@ SingleLinkedList.prototype.insertTail = function(data) {
   this.length++;
 };
 
+// 按照位置插入方法
 SingleLinkedList.prototype.insertAt = function(index, data) {
   var current = this.head;
 
@@ -57,6 +62,59 @@ SingleLinkedList.prototype.insertAt = function(index, data) {
   this.length++;
 };
 
+// 删除头部节点方法
+SingleLinkedList.prototype.deleteHead = function() {
+  this.head = this.head.next;
+  this.length--;
+  return 'Delete head node';
+};
+
+// 删除尾部节点方法
+SingleLinkedList.prototype.deleteTail = function() {
+  var currentNode = this.head;
+
+  if (currentNode.next === null) {
+    this.head = null;
+    this.tail = null;
+  } else {
+    for (var i = 0; i < this.length; i++) {
+      if (currentNode.next.next === null) {
+        currentNode.next = null;
+        this.tail = currentNode;
+        break;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+  }
+
+  this.length--;
+}
+
+// 根据位置参数删除节点
+SingleLinkedList.prototype.deleteAt = function(index) {
+  var prevNode = this.head;
+  
+  if (index > this.length) {
+    throw("Over list size");
+  }
+
+  for (var i = 0; i < index - 2; i++) {
+    prevNode = prevNode.next;
+  }
+
+  var currentNode = prevNode.next;
+
+  if (currentNode.next === null) {
+    prevNode.next = null;
+  } else {
+    prevNode.next = prevNode.next.next;
+  }
+
+  this.length--;
+}
+
+// 转换为数组
 SingleLinkedList.prototype.toArray = function() {
   var array = [],
       current = this.head;
@@ -80,4 +138,10 @@ singleLinkedList.insertTail(1000);
 singleLinkedList.insertAt(1, 111);
 
 console.log(singleLinkedList.toArray());
-console.log(singleLinkedList.length)
+console.log(singleLinkedList.length);
+
+// console.log(singleLinkedList.deleteAt(3));
+// console.log(singleLinkedList.deleteHead());
+console.log(singleLinkedList.deleteTail());
+console.log(singleLinkedList.toArray());
+console.log(singleLinkedList.length);
