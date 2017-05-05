@@ -77,15 +77,12 @@ SingleLinkedList.prototype.deleteTail = function() {
     this.head = null;
     this.tail = null;
   } else {
-    for (var i = 0; i < this.length; i++) {
-      if (currentNode.next.next === null) {
-        currentNode.next = null;
-        this.tail = currentNode;
-        break;
-      } else {
-        currentNode = currentNode.next;
-      }
+    while(currentNode.next.next !== null) {
+      currentNode = currentNode.next;
     }
+
+    currentNode.next = null;
+    this.tail = currentNode;
   }
 
   this.length--;
