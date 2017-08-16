@@ -1,6 +1,8 @@
-/*
- * 树
+/**
+ * 二叉搜索树/二叉查找树
  */
+
+ 
 function Node(data) {
   this.data = data;
   this.leftChild = null;
@@ -53,7 +55,11 @@ BinaryTree.prototype.binaryTreeDepth = function() {
   return treeDepth(this.root);
 }
 
-
+/**
+ * @param  {object} node 当前节点对象
+ * @param  {string} childName Node类中子树属性名称
+ * @param  {object} newNode 新节点对象
+ */
 var insertChild = function(node, childName, newNode) {
   if (!node[childName]) {
     node[childName] = newNode;
@@ -62,6 +68,12 @@ var insertChild = function(node, childName, newNode) {
   }
 };
 
+/**
+ * 插入操作
+ * 
+ * @param  {object} node 当前节点对象
+ * @param  {object} newNode 新节点对象
+ */
 var insert = function(node, newNode) {
   if (newNode.data < node.data) {
     insertChild(node, 'leftChild', newNode);
@@ -70,7 +82,11 @@ var insert = function(node, newNode) {
   }
 };
 
-// 插入节点
+/**
+ * 二叉搜索树插入新节点方法
+ * 
+ * @param  {number} data 新节点的数值
+ */
 BinaryTree.prototype.insertNode = function(data) {
   var node = new Node(data);
 
@@ -169,6 +185,9 @@ binaryTree.insertNode(11);
 binaryTree.insertNode(12);
 binaryTree.insertNode(13);
 binaryTree.insertNode(2);
+
+console.log('树结构：');
+binaryTree.print()
 
 console.log('二叉树深度: ', binaryTree.binaryTreeDepth());
 // binaryTree.print();
