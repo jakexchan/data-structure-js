@@ -211,3 +211,5 @@ console.log('层次遍历: ');
 binaryTree.levelOrderTraverse(function(node) {
   console.log(node.data);
 });
+
+module.exports = binaryTree;
